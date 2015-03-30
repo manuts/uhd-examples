@@ -32,6 +32,11 @@ namespace po = boost::program_options;
 int UHD_SAFE_MAIN(int argc, char *argv[]){
     uhd::set_thread_priority_safe();
 
+    double d_rate       = 1000e3;
+    double d_freq       = 2600.0e6;
+    float d_gain        = 15.0;
+    std::string d_args  = "addr=192.168.10.2";
+
     //variables to be set by po
     std::string args, ant, subdev, ref;
     size_t num_bins;
@@ -42,11 +47,11 @@ int UHD_SAFE_MAIN(int argc, char *argv[]){
     po::options_description desc("Allowed options");
     desc.add_options()
         ("help", "help message")
-        ("args", po::value<std::string>(&args)->default_value(""), "multi uhd device address args")
+        ("args", po::value<std::string>(&args)->default_value(d_args), "multi uhd device address args")
         // hardware parameters
-        ("rate", po::value<double>(&rate), "rate of incoming samples (sps)")
-        ("freq", po::value<double>(&freq), "RF center frequency in Hz")
-        ("gain", po::value<double>(&gain), "gain for the RF chain")
+        ("rate", po::value<double>(&rate)->default_value(d_rate), "rate of incoming samples (sps)")
+        ("freq", po::value<double>(&freq)->default_value(d_freq), "RF center frequency in Hz")
+        ("gain", po::value<double>(&gain)->default_value(d_gain), "gain for the RF chain")
         ("ant", po::value<std::string>(&ant), "daughterboard antenna selection")
         ("subdev", po::value<std::string>(&subdev), "daughterboard subdevice specification")
         ("bw", po::value<double>(&bw), "daughterboard IF filter bandwidth in Hz")
