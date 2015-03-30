@@ -16,7 +16,7 @@
 # 
 
 # Specify uhd installation path
-prefix 					= /target
+prefix 					= /usr/local
 
 # programs
 CC							:= gcc
@@ -30,21 +30,23 @@ RM							:= rm -f
 # flags
 COMPILER_FLAGS	=  -I$(prefix)/include/
 COMPILER_FLAGS	+= -g -O2 -Wall -fPIC
-LINKER_FLAGS		=  -L$(prefix)/lib
+LINKER_FLAGS		=  -L$(prefix)/lib -L/usr/lib/x86_64-linux-gnu
+LINKER_FLAGS		+= -lncurses
 LINKER_FLAGS		+= -luhd
-LINKER_FLAGS		+= -lboost_program_options-mt
-LINKER_FLAGS		+= -lboost_system-mt
-LINKER_FLAGS		+= -lboost_thread-mt
-LINKER_FLAGS		+= -lboost_date_time-mt
-LINKER_FLAGS		+= -lboost_filesystem-mt
-LINKER_FLAGS		+= -lboost_regex-mt
-LINKER_FLAGS		+= -lboost_serialization-mt
+LINKER_FLAGS		+= -lboost_program_options
+LINKER_FLAGS		+= -lboost_system
+LINKER_FLAGS		+= -lboost_thread
+LINKER_FLAGS		+= -lboost_date_time
+LINKER_FLAGS		+= -lboost_filesystem
+LINKER_FLAGS		+= -lboost_regex
+LINKER_FLAGS		+= -lboost_serialization
 
 # add to the list below, the programs you would like to
 # compile.
 srcs						:=					\
 	rx_samples_to_file.cpp		\
 	rx_multi_samples.cpp			\
+	rx_ascii_art_dft.cpp			\
 
 objs						= $(patsubst %.cpp,	%.o, $(srcs))
 exes						= $(patsubst %.o,	%.exe, $(objs))
