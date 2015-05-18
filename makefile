@@ -45,6 +45,7 @@ LINKER_FLAGS		+= -lboost_serialization-mt
 srcs						:=					\
 	rx_samples_to_file.cpp		\
 	rx_multi_samples.cpp			\
+	rx_ascii_art_dft.cpp			\
 
 objs						= $(patsubst %.cpp,	%.o, $(srcs))
 exes						= $(patsubst %.o,	%.exe, $(objs))
